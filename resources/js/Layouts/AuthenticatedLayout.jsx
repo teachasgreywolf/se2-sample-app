@@ -4,6 +4,7 @@ import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
+import { Toaster } from '@/shadcn/ui/toaster';
 
 export default function Authenticated({ header, children }) {
     const user = usePage().props.auth.user;
@@ -25,6 +26,14 @@ export default function Authenticated({ header, children }) {
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Dashboard
+                                </NavLink>
+
+                                <NavLink href={route('provinces.index', {sort_field: "created_at", sort_direction: "desc"})} active={route().current('provinces.index')}>
+                                    Provinces
+                                </NavLink>
+
+                                <NavLink href={route('regions.index', {sort_field: "created_at", sort_direction: "desc"})} active={route().current('regions.index')}>
+                                    Regions
                                 </NavLink>
                             </div>
                         </div>
@@ -122,6 +131,8 @@ export default function Authenticated({ header, children }) {
             )}
 
             <main>{children}</main>
+
+            <Toaster />
         </div>
     );
 }
